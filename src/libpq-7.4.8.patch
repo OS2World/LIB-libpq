@@ -1,0 +1,714 @@
+*** src/include/pg_config_manual.h.orig	Mon Sep 22 04:57:20 2003
+--- src/include/pg_config_manual.h	Sun Aug 29 17:40:42 2004
+***************
+*** 165,171 ****
+--- 165,175 ----
+   * here's where to twiddle it.  You can also override this at runtime
+   * with the postmaster's -k switch.
+   */
++ #ifdef OS2
++ #define DEFAULT_PGSOCKET_DIR  "\\tmp"
++ #else
+  #define DEFAULT_PGSOCKET_DIR  "/tmp"
++ #endif
+  
+  /*
+   * Defining this will make float4 and float8 operations faster by
+*** src/include/pg_config_os.h.orig	Wed Aug  3 22:27:54 2005
+--- src/include/pg_config_os.h	Sun Sep  5 16:35:18 2004
+***************
+*** 0 ****
+--- 1,6 ----
++ /* pg_config_os.h for OS/2+EMX libpq build
++  *
++  * Unlike the backend code, there is nothing in libpq that
++  * requires any definitions in this file, but it has to exist
++  * to build libpq (see src/include/c.h).
++  */
+*** src/include/pg_config.h.orig	Wed Aug  3 22:28:44 2005
+--- src/include/pg_config.h	Tue Aug  2 23:15:36 2005
+***************
+*** 0 ****
+--- 1,206 ----
++ /* manually compiled pg_config.h for OS/2+EMX libpq build
++  *
++  * derived from src/include/pg_config.h.in
++  * inspired by src/include/pg_config_h.win32
++  */
++ 
++ #ifndef pg_config_h_os2emx__
++ #define pg_config_h_os2emx__
++ 
++ #define PG_VERSION "7.4.8"
++ #define PG_VERSION_STR "7.4.8 (os2emx)"
++ 
++ #define DEF_PGPORT 5432
++ #define DEF_PGPORT_STR "5432"
++ 
++ #define ALIGNOF_SHORT	2
++ #define ALIGNOF_INT	4
++ #define ALIGNOF_LONG	4
++ #define ALIGNOF_LONG_LONG_INT	4
++ #define ALIGNOF_DOUBLE	4
++ #define MAXIMUM_ALIGNOF	4
++ 
++ #define ACCEPT_TYPE_ARG3	int
++ 
++ /* Define to 1 to build client libraries as thread-safe code.
++    (--enable-thread-safety) */
++ /*#undef ENABLE_THREAD_SAFETY*/
++ 
++ #define HAVE_ATEXIT	1
++ 
++ #define HAVE_CBRT	1
++ 
++ #define HAVE_CRYPT	1
++ #define HAVE_CRYPT_H	1
++ 
++ #define HAVE_DECL_FDATASYNC	0
++ 
++ #define HAVE_DECL_SNPRINTF	1
++ #define HAVE_SNPRINTF	1
++ #define HAVE_DECL_VSNPRINTF	1
++ #define HAVE_VSNPRINTF	1
++ 
++ #define HAVE_DLOPEN	1
++ 
++ #define HAVE_ENDIAN_H	1
++ 
++ #define HAVE_FCVT	1
++ 
++ /* Define to 1 if fseeko (and presumably ftello) exists and is declared. */
++ /*#undef HAVE_FSEEKO*/
++ 
++ #define HAVE_GETHOSTBYNAME_R	1
++ #define HAVE_GETHOSTNAME	1
++ 
++ #define HAVE_GETOPT	1
++ #define HAVE_GETOPT_H	1
++ #define HAVE_GETOPT_LONG	1
++ 
++ #define HAVE_INT_TIMEZONE	1
++ 
++ #define HAVE_ISINF	1
++ 
++ #define HAVE_LIBCRYPTO	1
++ 
++ #define HAVE_LIBDL	1
++ 
++ #define HAVE_LIBM	1
++ 
++ #define HAVE_LIBREADLINE	1
++ 
++ #define HAVE_LIBSOCKET	1
++ 
++ #define HAVE_LIBSSL	1
++ 
++ #define HAVE_LIBZ	1
++ 
++ #define HAVE_LL_CONSTANTS	1
++ 
++ #define HAVE_LONG_LONG_INT_64	1
++ #define INT64_FORMAT 	"%lld"
++ 
++ #define HAVE_MEMMOVE	1
++ #define HAVE_MEMORY_H	1
++ 
++ #define HAVE_NETINET_IN_H	1
++ #define HAVE_NETINET_TCP_H	1
++ 
++ #define HAVE_PWD_H	1
++ 
++ #define HAVE_RANDOM	1
++ #define HAVE_SRANDOM	1
++ 
++ #define HAVE_READLINE_HISTORY_H	1
++ #define HAVE_READLINE_READLINE_H	1
++ #define HAVE_REPLACE_HISTORY_ENTRY	1
++ #define HAVE_RL_COMPLETION_APPEND_CHARACTER	1
++ /*#define HAVE_RL_FILENAME_COMPLETION_FUNCTION	1*/
++ 
++ #define HAVE_RINT	1
++ 
++ #define HAVE_SIGPROCMASK	1
++ #define HAVE_SIGSETJMP	1
++ #define HAVE_SIG_ATOMIC_T	1
++ 
++ /* Define to 1 if you have spinlocks. */
++ #undef HAVE_SPINLOCKS
++ 
++ #define HAVE_STDLIB_H	1
++ 
++ #define HAVE_STRCASECMP 1
++ #define	strcasecmp(a,b)	stricmp(a,b)
++ #define	strncasecmp(a,b,c)	strnicmp(a,b,c)
++ 
++ #define HAVE_STRDUP	1
++ 
++ #define HAVE_STRERROR	1
++ 
++ #define HAVE_STRINGIZE	1
++ 
++ #define HAVE_STRINGS_H	1
++ #define HAVE_STRING_H	1
++ #define HAVE_STRTOL	1
++ #define HAVE_STRTOUL	1
++ 
++ #define HAVE_STRTOLL	1
++ #define strtoll(a,b,c)	_strtoll(a,b,c)
++ #define HAVE_STRTOULL	1
++ #define strtoull(a,b,c)	_strtoull(a,b,c)
++ 
++ #define HAVE_STRUCT_SOCKADDR_UN	1
++ 
++ #define HAVE_SYSCONF	1
++ #define HAVE_SYSLOG	1
++ 
++ #define HAVE_SYS_IPC_H	1
++ #define HAVE_SYS_SEM_H	1
++ #define HAVE_SYS_SHM_H	1
++ 
++ #define HAVE_SYS_SELECT_H	1
++ #define HAVE_SYS_SOCKET_H	1
++ 
++ #define HAVE_SYS_STAT_H	1
++ 
++ #define HAVE_SYS_TYPES_H	1
++ 
++ #define HAVE_SYS_UN_H	1
++ 
++ #define HAVE_TERMIOS_H	1
++ 
++ #define HAVE_TZNAME	1
++ 
++ #define HAVE_UNION_SEMUN	1
++ 
++ #define HAVE_UNISTD_H	1
++ 
++ #define HAVE_UNIX_SOCKETS	1
++ 
++ #define HAVE_UTIME	1
++ #define HAVE_UTIMES	1
++ #define HAVE_UTIME_H	1
++ 
++ #define HAVE_WAITPID	1
++ 
++ /* Define if non *_r libc functions are not thread safe */
++ #undef NEED_REENTRANT_FUNCS
++ 
++ /* Define to the address where bug reports for this package should be sent. */
++ #undef PACKAGE_BUGREPORT
++ 
++ /* Define to the full name of this package. */
++ #undef PACKAGE_NAME
++ 
++ /* Define to the full name and version of this package. */
++ #undef PACKAGE_STRING
++ 
++ /* Define to the one symbol short name of this package. */
++ #undef PACKAGE_TARNAME
++ 
++ /* Define to the version of this package. */
++ #undef PACKAGE_VERSION
++ 
++ #define SIZEOF_UNSIGNED_LONG	4
++ 
++ /* Define to 1 if you have the ANSI C header files. */
++ #undef STDC_HEADERS
++ 
++ /* Define to 1 to build with assertion checks. (--enable-cassert) */
++ #define USE_ASSERT_CHECKING	1
++ 
++ #define USE_INTEGER_DATETIMES	1
++ 
++ /* Define to 1 to build with Rendezvous support. (--with-rendezvous) */
++ #undef USE_RENDEZVOUS
++ 
++ #define USE_SSL	1
++ 
++ #define USE_SYSV_SEMAPHORES	1
++ #define USE_SYSV_SHARED_MEMORY	1
++ 
++ /* Define to 1 to make fseeko visible on some hosts (e.g. glibc 2.2). */
++ #undef _LARGEFILE_SOURCE
++ 
++ /* Define for large files, on AIX-style hosts. */
++ #undef _LARGE_FILES
++ 
++ #endif /* pg_config_h_os2emx__ */
+*** src/include/libpq/pqcomm.h.orig	Mon Aug  4 13:40:12 2003
+--- src/include/libpq/pqcomm.h	Sun Jul 31 23:20:22 2005
+***************
+*** 77,87 ****
+--- 77,97 ----
+  
+  /* Configure the UNIX socket location for the well known port. */
+  
++ #ifdef OS2
++ #define UNIXSOCK_PATH(path,port,defpath) \
++ 		snprintf(path, sizeof(path), "\\socket%s\\.s.PGSQL.%d", \
++ 				((defpath) && *(defpath) != '\0') ? (defpath) : \
++ 				DEFAULT_PGSOCKET_DIR, \
++ 				(port))
++ #else
++ #error "OS2 not defined"
+  #define UNIXSOCK_PATH(path,port,defpath) \
+  		snprintf(path, sizeof(path), "%s/.s.PGSQL.%d", \
+  				((defpath) && *(defpath) != '\0') ? (defpath) : \
+  				DEFAULT_PGSOCKET_DIR, \
+  				(port))
++ 
++ #endif
+  
+  /*
+   * These manipulate the frontend/backend protocol version number.
+*** src/interfaces/libpq/Makefile.os2emx.orig	Wed Aug  3 22:22:10 2005
+--- src/interfaces/libpq/Makefile.os2emx	Mon Aug  1 00:32:46 2005
+***************
+*** 0 ****
+--- 1,100 ----
++ # Makefile for the libpq client library for PostgreSQL v7.4.8.
++ # Andrew MacIntyre, August 2005.
++ #
++ # Vincenzo Venuto's port of PostgreSQL 7.3.2 only provides single-threaded
++ # libraries and DLLs.
++ #
++ # This makefile builds multithread aware libraries and a DLL that can be
++ # linked into an EMX application using EMX's multithreaded C runtime
++ # library (EMXLIBCM.DLL).
++ 
++ # compiler settings
++ CC=gcc
++ CC_OPT=-O2 -Zmt -mprobe -fomit-frame-pointer
++ LD=gcc
++ LD_OPT=-Zcrtdll
++ LD_DLL=-Zdll -Zmt -Zcrtdll -Zomf
++ LIBS=-lgcc -lcrypt -lssl -lcrypto -lsocket
++ LIBDIRS=-L.
++ 
++ TOP_SRCDIR=../..
++ BACKEND_SRC=$(TOP_SRCDIR)/backend
++ 
++ # include directories - search the PG OS/2 include directories first
++ INCDIRS=-I$(TOP_SRCDIR)/include -I.
++ 
++ # symbol definitions
++ CC_DEF= -DFRONTEND -DNDEBUG -DSYSCONFDIR="" -DMULTIBYTE=1 -DOS2
++ 
++ # object files required for the library, in both OMF and a.out format
++ OBJS= fe-auth.obj fe-connect.obj fe-exec.obj fe-misc.obj \
++       fe-print.obj fe-lobj.obj fe-protocol2.obj fe-protocol3.obj \
++       fe-secure.obj pqexpbuffer.obj dllist.obj md5.obj ip.obj \
++       pqsignal.obj wchar.obj encnames.obj inet_aton.obj \
++       getaddrinfo.obj thread.obj path.obj
++ AOUT_OBJS=$(subst .obj,.o,$(OBJS))
++ 
++ # the libraries and associated paraphernalia
++ PQ_VER=74
++ PQ_LIB=pq$(PQ_VER).lib pq$(PQ_VER).a
++ PQ_DLL=pq$(PQ_VER).dll
++ PQ_DEF=pqdllos2.def
++ PQ_IMPLIB=pq$(PQ_VER)_d.lib pq$(PQ_VER)_d.a
++ 
++ # implicit rules
++ %.o: %.c
++ 	$(CC) $(CC_OPT) $(INCDIRS) $(CC_DEF) -c $< -o $@
++ 
++ %.obj: %.c
++ 	$(CC) -Zomf $(CC_OPT) $(INCDIRS) $(CC_DEF) -c $< -o $@
++ 
++ # the normal outputs
++ all:  $(PQ_LIB) $(PQ_DLL) $(PQ_IMPLIB)
++ 
++ # specific rules
++ pq$(PQ_VER).a: $(AOUT_OBJS)
++ 	ar crs $@ $^
++ 
++ pq$(PQ_VER)_d.a: $(PQ_DEF)
++ 	emximp -o $@ $<
++ 
++ pq$(PQ_VER).lib: $(OBJS)
++ 	emxomfar crs $@ $^
++ 
++ pq$(PQ_VER)_d.lib: $(PQ_DEF)
++ 	emximp -o $@ $<
++ 
++ pq$(PQ_VER).dll: $(OBJS) $(PQ_DEF)
++ 	$(LD) $(LD_DLL) -o $@ $(OBJS) $(LIBDIRS) $(LIBS) $(PQ_DEF)
++ 
++ # port specific source files
++ crypt.c getaddrinfo.c inet_aton.c snprintf.c strerror.c path.c thread.c: % : $(TOP_SRCDIR)/port/%
++ 	cp $< $@
++ 
++ md5.c ip.c: % : $(BACKEND_SRC)/libpq/%
++ 	cp $< $@
++ 
++ dllist.c: $(BACKEND_SRC)/lib/dllist.c
++ 	cp $< $@
++ 
++ encnames.c wchar.c : % : $(BACKEND_SRC)/utils/mb/%
++ 	cp $< $@
++ 
++ # test progs
++ test: testlibpq.exe testlibpq_dll.exe testlo.exe testlo_dll.exe
++ 
++ testlibpq.exe: ../../test/examples/testlibpq.c $(PQ_LIB)
++ 	$(CC) $(CC_OPT) $(INCDIRS) -o $@ $< -lpq$(PQ_VER) $(LIBDIRS) $(LIBS)
++ 
++ testlibpq_dll.exe: ../../test/examples/testlibpq.c $(PQ_DLL)
++ 	$(CC) $(CC_OPT) $(LD_OPT) $(INCDIRS) -o $@ $< -lpq$(PQ_VER)_d $(LIBDIRS) $(LIBS)
++ 
++ testlo.exe: testlo.c $(PQ_LIB)
++ 	$(CC) $(CC_OPT) -I./libpq-7.4.8-emx/include -o $@ $< -lpq$(PQ_VER) $(LIBDIRS) $(LIBS)
++ 
++ testlo_dll.exe: testlo.c $(PQ_DLL)
++ 	$(CC) $(CC_OPT) $(LD_OPT) -I./libpq-7.4.8-emx/include -o $@ $< -lpq$(PQ_VER)_d $(LIBDIRS) $(LIBS)
++ 
++ # delete built stuff
++ clean:
++ 	-rm *.o *.obj *.a *.lib *.dll *.exe
+*** src/interfaces/libpq/pqdllos2.def.orig	Wed Aug  3 22:22:32 2005
+--- src/interfaces/libpq/pqdllos2.def	Sun Jul 31 23:01:54 2005
+***************
+*** 0 ****
+--- 1,121 ----
++ LIBRARY PQ74 INITINSTANCE TERMINSTANCE
++ DESCRIPTION "PostgreSQL Client Library v7.4.8 for OS2+EMX, prepared by andymac@pcug.org.au"
++ PROTMODE
++ DATA MULTIPLE NONSHARED
++ EXPORTS
++ 	PQconnectdb
++ 	PQsetdbLogin
++ 	PQconndefaults
++ 	PQfinish
++ 	PQreset
++ 	PQrequestCancel
++ 	PQdb
++ 	PQuser
++ 	PQpass
++ 	PQhost
++ 	PQport
++ 	PQtty
++ 	PQoptions
++ 	PQstatus
++ 	PQerrorMessage
++ 	PQsocket
++ 	PQbackendPID
++ 	PQtrace
++ 	PQuntrace
++ 	PQsetNoticeProcessor   
++ 	PQexec
++ 	PQnotifies
++ 	PQsendQuery
++ 	PQgetResult
++ 	PQisBusy
++ 	PQconsumeInput
++ 	PQgetline
++ 	PQputline
++ 	PQgetlineAsync
++ 	PQputnbytes
++ 	PQendcopy
++ 	PQfn
++ 	PQresultStatus
++ 	PQntuples
++ 	PQnfields
++ 	PQbinaryTuples
++ 	PQfname
++ 	PQfnumber
++ 	PQftype
++ 	PQfsize
++ 	PQfmod
++ 	PQcmdStatus
++ 	PQoidStatus
++ 	PQcmdTuples
++ 	PQgetvalue
++ 	PQgetlength
++ 	PQgetisnull
++ 	PQclear
++ 	PQmakeEmptyPGresult
++ 	PQprint
++ 	PQdisplayTuples
++ 	PQprintTuples
++ 	lo_open
++ 	lo_close
++ 	lo_read
++ 	lo_write
++ 	lo_lseek
++ 	lo_creat
++ 	lo_tell
++ 	lo_unlink
++ 	lo_import
++ 	lo_export
++ 	pgresStatus
++ 	PQmblen
++ 	PQresultErrorMessage   
++ 	PQresStatus
++ 	termPQExpBuffer
++ 	appendPQExpBufferChar  
++ 	initPQExpBuffer
++ 	resetPQExpBuffer
++ 	PQoidValue
++ 	PQclientEncoding
++ 	PQenv2encoding
++ 	appendBinaryPQExpBuffer
++ 	appendPQExpBufferStr   
++ 	destroyPQExpBuffer
++ 	createPQExpBuffer
++ 	PQconninfoFree
++ 	PQconnectPoll
++ 	PQconnectStart
++ 	PQflush
++ 	PQisnonblocking
++ 	PQresetPoll
++ 	PQresetStart
++ 	PQsetClientEncoding
++ 	PQsetnonblocking
++ 	PQfreeNotify
++ 	PQescapeString
++ 	PQescapeBytea
++ 	printfPQExpBuffer
++ 	appendPQExpBuffer
++ 	pg_encoding_to_char
++ 	pg_utf_mblen
++ 	PQunescapeBytea
++ 	PQfreemem
++ 	PQtransactionStatus
++ 	PQparameterStatus
++ 	PQprotocolVersion
++ 	PQsetErrorVerbosity
++ 	PQsetNoticeReceiver
++ 	PQexecParams
++ 	PQsendQueryParams
++ 	PQputCopyData
++ 	PQputCopyEnd
++ 	PQgetCopyData
++ 	PQresultErrorField
++ 	PQftable
++ 	PQftablecol
++ 	PQfformat
++ 	PQexecPrepared
++ 	PQsendQueryPrepared
++ 	PQgetssl
++ 	is_absolute_path
++ 	first_path_separator
++ 	last_path_separator
++ 	get_progname
+*** src/interfaces/libpq/testlo.c.orig	Wed Aug  3 22:22:46 2005
+--- src/interfaces/libpq/testlo.c	Wed Jul 20 00:02:50 2005
+***************
+*** 0 ****
+--- 1,159 ----
++ /*-------------------------------------------------------------------------
++  *
++  * testlo.c
++  *	  test using large objects with libpq
++  *
++  * Portions Copyright (c) 1996-2003, PostgreSQL Global Development Group
++  * Portions Copyright (c) 1994, Regents of the University of California
++  *
++  *
++  * IDENTIFICATION
++  *	  $Header: /cvsroot/pgsql/src/test/examples/testlo.c,v 1.20 2003/08/04 02:40:20 momjian Exp $
++  *
++  *-------------------------------------------------------------------------
++  */
++ #include <stdio.h>
++ #include <stdlib.h>
++ 
++ #include <sys/types.h>
++ #include <sys/stat.h>
++ #include <fcntl.h>
++ #include <unistd.h>
++ 
++ #include "libpq-fe.h"
++ #include "libpq/libpq-fs.h"
++ 
++ #define BUFSIZE			1024
++ 
++ 
++ static void
++ pickout(PGconn *conn, Oid lobjId, int start, int len)
++ {
++ 	int			lobj_fd;
++ 	char	   *buf;
++ 	int			nbytes;
++ 	int			nread;
++ 
++ 	lobj_fd = lo_open(conn, lobjId, INV_READ);
++ 	if (lobj_fd < 0)
++ 		fprintf(stderr, "can't open large object %u", lobjId);
++ 
++ 	lo_lseek(conn, lobj_fd, start, SEEK_SET);
++ 	buf = malloc(len + 1);
++ 
++ 	nread = 0;
++ 	while (len - nread > 0)
++ 	{
++ 		nbytes = lo_read(conn, lobj_fd, buf, len - nread);
++ 		buf[nbytes] = '\0';
++ 		fprintf(stderr, ">>> %s", buf);
++ 		nread += nbytes;
++ 		if (nbytes <= 0)
++ 			break;				/* no more data? */
++ 	}
++ 	fprintf(stderr, "\n");
++ 	lo_close(conn, lobj_fd);
++ }
++ 
++ static void
++ overwrite(PGconn *conn, Oid lobjId, int start, int len)
++ {
++ 	int			lobj_fd;
++ 	char	   *buf;
++ 	int			nbytes;
++ 	int			nwritten;
++ 	int			i;
++ 
++ 	lobj_fd = lo_open(conn, lobjId, INV_READ);
++ 	if (lobj_fd < 0)
++ 		fprintf(stderr, "can't open large object %u", lobjId);
++ 
++ 	lo_lseek(conn, lobj_fd, start, SEEK_SET);
++ 	buf = malloc(len + 1);
++ 
++ 	for (i = 0; i < len; i++)
++ 		buf[i] = 'X';
++ 	buf[i] = '\0';
++ 
++ 	nwritten = 0;
++ 	while (len - nwritten > 0)
++ 	{
++ 		nbytes = lo_write(conn, lobj_fd, buf + nwritten, len - nwritten);
++ 		nwritten += nbytes;
++ 		if (nbytes <= 0)
++ 		{
++ 			fprintf(stderr, "\nWRITE FAILED!\n");
++ 			break;
++ 		}
++ 	}
++ 	fprintf(stderr, "\n");
++ 	lo_close(conn, lobj_fd);
++ }
++ 
++ static void
++ exit_nicely(PGconn *conn)
++ {
++ 	PQfinish(conn);
++ 	exit(1);
++ }
++ 
++ int
++ main(int argc, char **argv)
++ {
++ 	char	   *in_filename,
++ 			   *out_filename;
++ 	char	   *database;
++ 	Oid			lobjOid;
++ 	PGconn	   *conn;
++ 	PGresult   *res;
++ 
++ 	if (argc != 4)
++ 	{
++ 		fprintf(stderr, "Usage: %s database_name in_filename out_filename\n",
++ 				argv[0]);
++ 		exit(1);
++ 	}
++ 
++ 	database = argv[1];
++ 	in_filename = argv[2];
++ 	out_filename = argv[3];
++ 
++ 	/*
++ 	 * set up the connection
++ 	 */
++ 	conn = PQsetdb(NULL, NULL, NULL, NULL, database);
++ 
++ 	/* check to see that the backend connection was successfully made */
++ 	if (PQstatus(conn) == CONNECTION_BAD)
++ 	{
++ 		fprintf(stderr, "Connection to database '%s' failed.\n", database);
++ 		fprintf(stderr, "%s", PQerrorMessage(conn));
++ 		exit_nicely(conn);
++ 	}
++ 
++ 	res = PQexec(conn, "begin");
++ 	PQclear(res);
++ 	printf("importing file \"%s\" ...\n", in_filename);
++ 	lobjOid = lo_import(conn, in_filename);
++ 	if (lobjOid == 0)
++ 		fprintf(stderr, "%s\n", PQerrorMessage(conn));
++ 	else
++ 	{
++ 		printf("\tas large object %u.\n", lobjOid);
++ 
++ /*		printf("picking out bytes 1000-2000 of the large object\n");
++ 		pickout(conn, lobjOid, 1000, 1000);
++ 
++ 		printf("overwriting bytes 1000-2000 of the large object with X's\n");
++ 		overwrite(conn, lobjOid, 1000, 1000);
++ */
++ 		printf("exporting large object to file \"%s\" ...\n", out_filename);
++ 		if (!lo_export(conn, lobjOid, out_filename))
++ 			fprintf(stderr, "%s\n", PQerrorMessage(conn));
++ 	}
++ 
++ 	res = PQexec(conn, "end");
++ 	PQclear(res);
++ 	PQfinish(conn);
++ 	return 0;
++ }
+*** src/port/path.c.orig	Mon Aug  4 11:43:32 2003
+--- src/port/path.c	Wed Aug  3 22:47:04 2005
+***************
+*** 10,17 ****
+  is_absolute_path(const char *filename)
+  {
+  	return filename[0] == '/'
+! #ifdef WIN32					/* WIN32 paths can either have forward or
+! 								 * backward slashes */
+  		|| filename[0] == '\\'
+  		|| (isalpha(filename[0]) && filename[1] == ':'
+  			&& (filename[2] == '\\' || filename[2] == '/'))
+--- 10,17 ----
+  is_absolute_path(const char *filename)
+  {
+  	return filename[0] == '/'
+! #if defined(WIN32) || defined(OS2)	/* WIN32/OS2 paths can either have
+! 					 * forward or backward slashes */
+  		|| filename[0] == '\\'
+  		|| (isalpha(filename[0]) && filename[1] == ':'
+  			&& (filename[2] == '\\' || filename[2] == '/'))
+***************
+*** 27,33 ****
+  char *
+  first_path_separator(const char *filename)
+  {
+! #ifndef WIN32
+  	return strchr(filename, '/');
+  #else
+  	char	   *slash,
+--- 27,33 ----
+  char *
+  first_path_separator(const char *filename)
+  {
+! #if !defined(WIN32) && !defined(OS2)
+  	return strchr(filename, '/');
+  #else
+  	char	   *slash,
+***************
+*** 52,58 ****
+  char *
+  last_path_separator(const char *filename)
+  {
+! #ifndef WIN32
+  	return strrchr(filename, '/');
+  #else
+  	char	   *slash,
+--- 52,58 ----
+  char *
+  last_path_separator(const char *filename)
+  {
+! #if !defined(WIN32) && !defined(OS2)
+  	return strrchr(filename, '/');
+  #else
+  	char	   *slash,
